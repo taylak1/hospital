@@ -84,6 +84,17 @@ class DepartmentCreateAPIView(generics.CreateAPIView):
     serializer_class = DepartmentDetailSerializer
     permission_classes = [IsAdminUser]
 
+    def create(self, request, *args, **kwargs):
+        try:
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            info = serializer.save()
+            return Response(serializer.data, status.HTTP_201_CREATED)
+        except serializers.ValidationError:
+            return Response({'detail': 'Маалымат туура эмес'}, status.HTTP_400_BAD_REQUEST)
+        except NameError:
+            return Response({'detail': 'Код туура эмес'}, status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 class SpecialtyListAPIView(generics.ListAPIView):
     queryset = Specialty.objects.all()
     serializer_class = SpecialtyListSerializer
@@ -92,6 +103,17 @@ class SpecialtyListAPIView(generics.ListAPIView):
 class SpecialtyCreateAPIView(generics.CreateAPIView):
     serializer_class = SpecialtyDetailSerializer
     permission_classes = [IsAdminUser]
+
+    def create(self, request, *args, **kwargs):
+        try:
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            info = serializer.save()
+            return Response(serializer.data, status.HTTP_201_CREATED)
+        except serializers.ValidationError:
+            return Response({'detail': 'Маалымат туура эмес'}, status.HTTP_400_BAD_REQUEST)
+        except NameError:
+            return Response({'detail': 'Код туура эмес'}, status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class DoctorListAPIView(generics.ListAPIView):
     queryset = Doctor.objects.all()
@@ -111,6 +133,17 @@ class DoctorCreateApiView(generics.CreateAPIView):
     serializer_class = DoctorDetailSerializer
     permission_classes = [IsAdminUser]
 
+    def create(self, request, *args, **kwargs):
+        try:
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            info = serializer.save()
+            return Response(serializer.data, status.HTTP_201_CREATED)
+        except serializers.ValidationError:
+            return Response({'detail': 'Маалымат туура эмес'}, status.HTTP_400_BAD_REQUEST)
+        except NameError:
+            return Response({'detail': 'Код туура эмес'}, status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 class PatientListAPIView(generics.ListAPIView):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
@@ -119,6 +152,17 @@ class PatientListAPIView(generics.ListAPIView):
 class PatientCreateAPIView(generics.CreateAPIView):
     serializer_class = PatientSerializer
     permission_classes = [CheckDoctor]
+
+    def create(self, request, *args, **kwargs):
+        try:
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            info = serializer.save()
+            return Response(serializer.data, status.HTTP_201_CREATED)
+        except serializers.ValidationError:
+            return Response({'detail': 'Маалымат туура эмес'}, status.HTTP_400_BAD_REQUEST)
+        except NameError:
+            return Response({'detail': 'Код туура эмес'}, status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class AppointmentViewSet(viewsets.ModelViewSet):
     queryset = Appointment.objects.all()
@@ -139,4 +183,14 @@ class FeedbackCreateAPIView(generics.CreateAPIView):
     serializer_class = FeedbackSerializer
     permission_classes = [CheckPatient]
 
+    def create(self, request, *args, **kwargs):
+        try:
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            info = serializer.save()
+            return Response(serializer.data, status.HTTP_201_CREATED)
+        except serializers.ValidationError:
+            return Response({'detail': 'Маалымат туура эмес'}, status.HTTP_400_BAD_REQUEST)
+        except NameError:
+            return Response({'detail': 'Код туура эмес'}, status.HTTP_500_INTERNAL_SERVER_ERROR)
 
